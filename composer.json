@@ -1,0 +1,16 @@
+{
+    "name": "vendor/masrul",
+    "description": "web pendataan dan peminjaman aset kampus",
+    "autoload": {
+        "psr-4": {
+            "Vendor\\Masrul\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "masrul"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

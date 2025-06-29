@@ -1,0 +1,14 @@
+-- Active: 1748759034550@@127.0.0.1@3306@silapor
+CREATE DATABASE silapor;
+USE silapor;
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(260) NOT NULL,
+    user_name VARCHAR(160) NOT NULL UNIQUE,
+    contact VARCHAR(15) NOT NULL,
+    password VARCHAR(260) NOT NULL,
+    role ENUM('admin', 'dosen', 'mahasiswa'),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+ALTER TABLE users AUTO_INCREMENT = 10001;

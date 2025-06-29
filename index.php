@@ -27,10 +27,10 @@ require_once __DIR__ . '/config/database.php';
                     <a href="#about" class="nav-link">About</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Login</a>
+                    <a href="views\auth\login.php" class="nav-link">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link btn-register">Register</a>
+                    <a href="views\auth\register.php" class="nav-link btn-register">Register</a>
                 </li>
             </ul>
             <div class="hamburger" id="hamburger">
@@ -155,10 +155,10 @@ require_once __DIR__ . '/config/database.php';
                 <div class="footer-section">
                     <h4>Ikuti Kami</h4>
                     <div class="social-links">
-                        <a href="#" class="social-link">Facebook</a>
-                        <a href="#" class="social-link">Instagram</a>
-                        <a href="#" class="social-link">Twitter</a>
-                        <a href="#" class="social-link">YouTube</a>
+                        <a href="https://wa.me/qr/EG623NOOTEASA1" class="social-link">WhatsApp</a>
+                        <a href="https://www.instagram.com/__masrulhadi?igsh=MWRrcWY3cDY1YWU5Ng==" class="social-link">Instagram</a>
+                        <a href="https://github.com/simasrolhadi" class="social-link">Github</a>
+                        <a href="http://www.youtube.com/@ANITAMAXWIN-t8o" class="social-link">YouTube</a>
                     </div>
                 </div>
             </div>

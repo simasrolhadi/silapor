@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS Glassmorphism</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Custom CSS untuk efek glassmorphism */
+        .glass-container {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glass-card {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-nav {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Animasi bounce */
+        .bounce-in {
+            animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        /* Efek ripple */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+            animation: ripple-animation 0.6s ease-out;
+        }
+        
+        @keyframes ripple-animation {
+            0% {
+                transform: scale(0);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        /* Hover effects */
+        .app-icon:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .app-icon:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+        
+        /* Tab active state */
+        .tab-active {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 p-4 flex items-center justify-center">
+    <!-- Background blur elements -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-white/20 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-blue-300/30 rounded-full blur-2xl animate-pulse" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/2 right-1/3 w-32 h-32 bg-yellow-300/25 rounded-full blur-xl animate-pulse" style="animation-delay: 0.5s;"></div>
+    </div>
+
+    <div class="relative w-full max-w-sm mx-auto">
+        <!-- Main Glass Container -->
+        <div class="glass-container rounded-3xl p-6 bounce-in">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center space-x-3">
+                    <div class="w-3 h-3 bg-red-500 rounded-full shadow-lg shadow-red-500/50"></div>
+                    <div class="w-3 h-3 bg-yellow-500 rounded-full shadow-lg shadow-yellow-500/50"></div>
+                    <div class="w-3 h-3 bg-green-500 rounded-full shadow-lg shadow-green-500/50"></div>
+                </div>
+                <div class="text-white/80 text-sm font-medium">iOS Control</div>
+            </div>
+
+            <!-- App Grid -->
+            <div class="grid grid-cols-4 gap-4 mb-8" id="appGrid">
+                <!-- Apps akan di-generate oleh JavaScript -->
+            </div>
+
+            <!-- Glass Card -->
+            <div class="glass-card rounded-2xl p-4 mb-6">
+                <div class="flex items-center space-x-3 mb-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full flex items-center justify-center">
+                        <i data-lucide="user" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div>
+                        <div class="text-white font-semibold text-sm">Welcome back!</div>
+                        <div class="text-white/70 text-xs">Your apps are ready</div>
+                    </div>
+                </div>
+                <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-blue-400 to-purple-500 rounded-full progress-bar" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="glass-nav rounded-2xl p-2 relative overflow-hidden" id="bottomNav">
+                <div class="flex justify-around relative z-10" id="tabContainer">
+                    <!-- Tabs akan di-generate oleh JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data aplikasi
+        const apps = [
+            { icon: 'phone', label: 'Phone', color: 'from-green-400 to-green-600' },
+            { icon: 'message-circle', label: 'Messages', color: 'from-blue-400 to-blue-600' },
+            { icon: 'mail', label: 'Mail', color: 'from-blue-500 to-indigo-600' },
+            { icon: 'calendar', label: 'Calendar', color: 'from-red-400 to-red-600' },
+            { icon: 'camera', label: 'Camera', color: 'from-gray-600 to-gray-800' },
+            { icon: 'music', label: 'Music', color: 'from-pink-400 to-red-500' },
+            { icon: 'settings', label: 'Settings', color: 'from-gray-500 to-gray-700' },
+            { icon: 'bell', label: 'Notifications', color: 'from-orange-400 to-red-500' }
+        ];
+
+        // Data tabs
+        const tabs = [
+            { icon: 'home', label: 'Home' },
+            { icon: 'search', label: 'Search' },
+            { icon: 'heart', label: 'Favorites' },
+            { icon: 'user', label: 'Profile' }
+        ];
+
+        let activeTab = 0;
+
+        // Fungsi untuk membuat ripple effect
+        function createRipple(event, element) {
+            const rect = element.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            ripple.style.left = (x - 25) + 'px';
+            ripple.style.top = (y - 25) + 'px';
+            ripple.style.width = '50px';
+            ripple.style.height = '50px';
+
+            element.appendChild(ripple);
+
+            // Hapus ripple setelah animasi selesai
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+
+        // Generate app grid
+        function generateApps() {
+            const appGrid = document.getElementById('appGrid');
+            
+            apps.forEach((app, index) => {
+                const appElement = document.createElement('button');
+                appElement.className = 'relative group app-icon';
+                appElement.style.animationDelay = (index * 0.1) + 's';
+                
+                appElement.innerHTML = `
+                    <div class="w-14 h-14 bg-gradient-to-br ${app.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 backdrop-blur-sm border border-white/10 relative overflow-hidden">
+                        <i data-lucide="${app.icon}" class="w-7 h-7 text-white drop-shadow-sm"></i>
+                    </div>
+                    <div class="text-white/90 text-xs mt-2 font-medium drop-shadow-sm">${app.label}</div>
+                `;
+                
+                // Event listener untuk ripple effect
+                appElement.addEventListener('click', (e) => {
+                    createRipple(e, appElement.querySelector('div'));
+                });
+                
+                appGrid.appendChild(appElement);
+            });
+        }
+
+        // Generate tabs
+        function generateTabs() {
+            const tabContainer = document.getElementById('tabContainer');
+            
+            tabs.forEach((tab, index) => {
+                const tabElement = document.createElement('button');
+                tabElement.className = 'relative flex flex-col items-center p-3 rounded-xl transition-all duration-300';
+                tabElement.dataset.tabIndex = index;
+                
+                if (index === activeTab) {
+                    tabElement.classList.add('tab-active');
+                }
+                
+                tabElement.innerHTML = `
+                    <i data-lucide="${tab.icon}" class="w-6 h-6 mb-1 ${index === activeTab ? 'text-white' : 'text-white/80'}"></i>
+                    <span class="text-xs font-medium ${index === activeTab ? 'text-white' : 'text-white/60'}">${tab.label}</span>
+                `;
+                
+                // Event listener untuk tab switching
+                tabElement.addEventListener('click', (e) => {
+                    setActiveTab(index);
+                    createRipple(e, document.getElementById('bottomNav'));
+                });
+                
+                tabContainer.appendChild(tabElement);
+            });
+        }
+
+        // Set active tab
+        function setActiveTab(index) {
+            activeTab = index;
+            const tabs = document.querySelectorAll('[data-tab-index]');
+            
+            tabs.forEach((tab, i) => {
+                const icon = tab.querySelector('i');
+                const span = tab.querySelector('span');
+                
+                if (i === index) {
+                    tab.classList.add('tab-active');
+                    icon.className = icon.className.replace('text-white/80', 'text-white');
+                    span.className = span.className.replace('text-white/60', 'text-white');
+                } else {
+                    tab.classList.remove('tab-active');
+                    icon.className = icon.className.replace('text-white', 'text-white/80');
+                    span.className = span.className.replace('text-white', 'text-white/60');
+                }
+            });
+        }
+
+        // Animate progress bar
+        function animateProgressBar() {
+            setTimeout(() => {
+                const progressBar = document.querySelector('.progress-bar');
+                progressBar.style.transition = 'width 1.2s ease-out';
+                progressBar.style.width = '75%';
+            }, 800);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            generateApps();
+            generateTabs();
+            animateProgressBar();
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

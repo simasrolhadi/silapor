@@ -16,8 +16,9 @@ require_once __DIR__ . '/config/database.php';
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="assets/image/borrowly_logo.png" alt="Logo FST">
+                <img src="assets/image/borrowly.png" alt="Logo FST">
                 <span>FST UIN Ar-Raniry</span>
+            </div>
             </div>
             <ul class="nav-menu" id="nav-menu">
                 <li class="nav-item">

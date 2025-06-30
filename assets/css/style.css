@@ -1,4 +1,4 @@
-/* Reset dan Base Styles */
+Reset dan Base Styles
 * {
   margin: 0;
   padding: 0;
@@ -52,12 +52,14 @@ body {
   font-weight: bold;
   font-size: 1.2rem;
   color: #2c5530;
+  width: fit-content; /* atau 100% jika ingin full lebar */
 }
 
 .nav-logo img {
-  width: 180px;
+  width: 220px;       /* Perbesar logo di sini */
   height: auto;
-  border-radius: 100%;
+  border-radius: 0%; /* Biar logo bulat (jika gambar bentuk kotak) */
+  object-fit: contain;
 }
 
 .nav-menu {
@@ -528,6 +530,9 @@ body {
 
   .news-card {
     margin: 0 10px;
+  }
+  .nav-logo img {
+    width: 200px;
   }
 }
 
